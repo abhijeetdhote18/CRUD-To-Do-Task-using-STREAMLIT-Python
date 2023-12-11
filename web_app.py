@@ -3,11 +3,13 @@ import pandas as pd
 from db_function import *
 import plotly.express as px
 
-st.title('WELCOME TO DO APPLICATION USING STREAMLIT')
-ch=['Create','Read','Update','Delete','About']
-option = st.sidebar.selectbox('Select Section',ch)
+st.title('WELCOME TO DO APPLICATION USING STREAMLIT')                           # Title on web page
+ch=['Create','Read','Update','Delete','About']                                  # choice options List
+option = st.sidebar.selectbox('Select Section',ch)                              # side bar with select box with given choice option
+
+# if Create is selected
 if option=='Create':
-    create_table()
+    create_table()                                                              # Function called from db_function
     st.subheader('Add Records')
     col1,col2=st.columns(2)
     with col1:
@@ -19,10 +21,10 @@ if option=='Create':
         add_data(task,task_status,task_due_date)
         st.success("Record Added sucessfully")
 
+# if Read is Selected
 elif option=='Read':
     st.subheader('View Records')
-    res=read_all()
-    #st.write(res)
+    res=read_all()                                                               # Function called from db_function
     df=pd.DataFrame(res,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
@@ -31,26 +33,26 @@ elif option=='Read':
         st.write(task_df)
 
         task_df=task_df.reset_index()
-        #st.dataframe(task_df)
+        
 
         p1=px.pie(task_df,names='Task Status',values='count')
         st.plotly_chart(p1)
 
     
-
+# if Update is selected
 elif option=='Update':
     st.subheader('Update Records')
-    res=read_all()
-    #st.write(res)
+    res=read_all()                                                                # Function called from db_function
+   
     df=pd.DataFrame(res,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
-    #st.write(st.dataframe(view_unique_task()))
-    list_of_task= [i[0] for i in view_unique_task()]
-    #st.write(list_of_task)
+    
+    list_of_task= [i[0] for i in view_unique_task()]                              # Function called from db_function
+    
     selected_task=st.selectbox('Task To Edit',list_of_task)
-    selected_result=get_task(selected_task)
-    #st.write(selected_result)
+    selected_result=get_task(selected_task)                                       # Function called from db_function
+   
     if selected_result:
         task=selected_result[0][0]
         task_status=selected_result[0][1]
@@ -62,31 +64,31 @@ elif option=='Update':
             n_task_status=st.selectbox("Status",['ToDo','Doing',"Done"])
             n_task_due_date=st.date_input("Due Date",task_due_date)
         if st.button("update Record"):
-            edit_data(n_task,n_task_status,n_task_due_date,task,task_status,task_due_date)
+            edit_data(n_task,n_task_status,n_task_due_date,task,task_status,task_due_date)    # Function called from db_function
             st.success("Record Added sucessfully")
-    res2=read_all()
-    #st.write(res)
+    res2=read_all()                                                                      # Function called from db_function
     df=pd.DataFrame(res2,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
 
+# if Delete is Selected
 elif option=='Delete':
     st.subheader('Remove Records')
     res=read_all()
-    #st.write(res)
+    
     df=pd.DataFrame(res,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
-    #st.write(st.dataframe(view_unique_task()))
+   
     list_of_task= [i[0] for i in view_unique_task()]
-    #st.write(list_of_task)
+    
     selected_task=st.selectbox('Task To Edit',list_of_task)
     st.warning("Do you want to Delete :: {}".format(selected_task))
     if st.button('Yes'):
         delete_data(selected_task)
         st.success("Selected task is deleted successfully {}".format(selected_task))
     res2=read_all()
-    #st.write(res)
+    
     df=pd.DataFrame(res2,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
