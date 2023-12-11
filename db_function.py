@@ -1,7 +1,7 @@
 import mysql.connector
 conn_obj=mysql.connector.connect(host='localhost',
-                                 username='@@@@@@',
-                                 password='*****',
+                                 username='root',
+                                 password='1234',
                                  database='ToDo')
 
 if conn_obj:
