@@ -4,7 +4,6 @@ from dbfun import *
 import plotly.express as px
 
 st.title('WELCOME TO DO APPLICATION USING STREAMLIT')
-#run : python -m streamlit run F:\mentor7\CRUD_Task_management\webapp.py 
 ch=['Create','Read','Update','Delete','About']
 option = st.sidebar.selectbox('Select Section',ch)
 if option=='Create':
@@ -91,7 +90,10 @@ elif option=='Delete':
     df=pd.DataFrame(res2,columns=['Task','Task Status','Task Due Date'])
     with st.expander("View Records"):
         st.dataframe(df)
-    
+
 
 elif option=='About':
     st.subheader('Project Information: Project on To Do List using STREAMLIT Module.\nStart Date : 06-11-2023, End Date : 09-11-2023 with help of mentor Deepali mam by Abhijeet Dhote.')
+
+
+#Note - run this in Terminal :> streamlit run webapp.py 
