@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from dbfun import *
+from db_function import *
 import plotly.express as px
 
 st.title('WELCOME TO DO APPLICATION USING STREAMLIT')
