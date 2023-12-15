@@ -5,5 +5,5 @@ This project implements a user-friendly Daily To-Do List application using Pytho
 
 ## Acknowledgement:
 * Thank you for guiding, my mentor Deepali Mam from SevenMentor.
-* Thanks to Streamlit for providing a great library for building interactive web apps.
+* Thanks to the number of Libraries provided to build interactive solutions.
 * Inspired by various to-do list applications.
